@@ -1,0 +1,5 @@
+johndoe1 12345678 johnPW12 109090.09 saving
+johndoe2 98663859 johnPW12 10.09 checking
+johndoe3 00988473 johnPW12 20.09 saving
+johndoe4 00932734 johnPW12 30.09 checking
+johndoe5 22384954 johnPW12 400.09 saving
