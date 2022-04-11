@@ -45,7 +45,17 @@ public class Account{
     public void setAccount_balance(double account_balance) {
         this.account_balance = account_balance;
     }
+    
+    //used for transfer money to subtract the balance
+    public void subtract_balance(double account_balance, double sub) {
+        this.account_balance = account_balance - sub;
+    }
 
+    //used for transfer money to add to the balance
+    public void add_balance(double account_balance, double add) {
+        this.account_balance = account_balance + add;
+    }
+    
     public String getType() {
         return type;
     }
