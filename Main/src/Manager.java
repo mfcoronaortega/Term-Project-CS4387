@@ -71,6 +71,24 @@ public class Manager{
         }
     }
 
+    // update the Balance in the text file(database)
+    // NOTE THIS METHOD WILL WRITE UNDER THE EXISTING CONTENTS IN A TEXT FILE
+    // NEED TO EDIT IT TO OVERWRITE EXISTINING CONTENTS IN THE TEXT FILE
+    public static void updateBalance(Account myAccount, double money) {
+        double oldLine = myaccounts[3].getAccount_balance();
+        myaccounts[3].subtract_balance(myAccount.getAccount_balance(), money);
+        // printAccounts();
+
+        for (int x = 0; x < myaccounts.length; x++) {
+            if (myaccounts[x].getAccount_number() == myAccount.getAccount_number()) {
+                System.out.println("ignoring" + myaccounts[x].getUsername());
+            }
+            Account newAccount = myaccounts[x];
+            writeData(newAccount);
+        } // end for
+
+    }// end update_balance method
+
     public Account findAccount(String account_number){ //Method to find an account thorugh account number
         Account newAccount = new Account("Null","Null","Null",0.00,"Null");
 
