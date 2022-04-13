@@ -1,10 +1,11 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
     public class SignIn {
         public static String un;
         public static String pw;
         public static String ac;
-        private static Account[] listofacc = Manager.readData() ;
+        private static LinkedList<Account> listofacc = Manager.readData();
 
 
         public static Account acceptInput() {

@@ -60,7 +60,6 @@ public class money_transfer {
 
             Main_user.subtract_balance(Main_user.getAccount_balance(), money);// subtract money from the account balance
             System.out.println("Balance is: " + Main_user.getAccount_balance());// display new balance
-            Manager.updateBalance(Main_user, money); // update the balance via manager class
 
             Second_user.add_balance(Second_user.getAccount_balance(), money); // add money into the account's balance
                                                                               // that is receiving
@@ -77,7 +76,7 @@ public class money_transfer {
 
     public static void main(String[] args) {
         Manager.readData();
-        Manager.printAccounts();
+//        Manager.printAccounts();
 
         Account Main_user = account_accessed("98663859");
 

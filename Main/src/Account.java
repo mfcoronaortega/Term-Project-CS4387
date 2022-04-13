@@ -5,6 +5,9 @@ public class Account{
     private double account_balance;
     private String type;
 
+    public Account() {
+    }
+
     public Account(String username, String password, String account_number, double account_balance, String type) {
         this.username = username;
         this.password = password;
@@ -63,4 +66,6 @@ public class Account{
     public void setType(String type) {
         this.type = type;
     }
+
+
 }
