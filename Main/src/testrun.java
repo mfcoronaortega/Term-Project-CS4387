@@ -32,9 +32,5 @@ public class testRun {
 
         Manager.writeData(missingAccount);
 
-
-
-
-
     }
 }
