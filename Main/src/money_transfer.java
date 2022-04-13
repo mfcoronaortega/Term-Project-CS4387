@@ -19,6 +19,14 @@ public class money_transfer {
 
         return null;
     }// end account_accessed method
+    
+    // method to check the current balance accessed
+    public static void checkBalance(Account Main_user) {
+        Boolean found = true;
+
+        System.out.println("Your current balance is: " + Main_user.getAccount_balance());
+
+    }// end account_accessed method
 
     // using the manager.findAccount method this method will let the user know if
     // the account to transfer money exists
@@ -74,6 +82,8 @@ public class money_transfer {
         Account Main_user = account_accessed("98663859");
 
         Account Second_user = transer_acc_exists("00932734");
+        
+        checkBalance(Main_user);
 
         transfer_money(user_account, sender_account, Main_user, Second_user);
 
