@@ -4,22 +4,6 @@ public class money_transfer {
     static Boolean user_account = false;
     static Boolean sender_account = false;
 
-    // this method will check if the user's account was accessed by using
-    // manager.findAccount
-    public static Account account_accessed(String account_number) {
-        Boolean found = true;
-
-        if (found) {
-            Account accountfound = Manager.findAccount(account_number);
-            System.out.println("your account has been accessed: " + accountfound.getUsername());
-            user_account = true;
-            return accountfound;
-        }
-        System.out.println("your account was not found");
-
-        return null;
-    }// end account_accessed method
-    
     // method to check the current balance accessed
     public static void checkBalance(Account Main_user) {
         Boolean found = true;
@@ -30,61 +14,59 @@ public class money_transfer {
 
     // using the manager.findAccount method this method will let the user know if
     // the account to transfer money exists
-    public static Account transer_acc_exists(String account_number) {
-        Boolean found = true;
-
-        if (found) {
-            Account accountfound = Manager.findAccount(account_number);
-            System.out.println("the account you were looking for has been found: " + accountfound.getUsername());
-            sender_account = true;
-            return accountfound;
+    public static Account transfer_acc_exists() {
+        Scanner scanner = new Scanner(System.in);
+        String uxinput = "";
+        do {
+            System.out.println("Enter the account number to which you would like to transfer money to:");
+            uxinput = scanner.nextLine();
+            Account accountfound = Manager.findAccount(uxinput);
+            if (!accountfound.getUsername().matches("Null")) { //IF already exists
+                sender_account = true;
+                return accountfound;
+            }
+            else{
+                System.out.println("That account does not exist, try again.");
+            }
         }
-        System.out.println("your account was not found");
-
-        return null;
+        while (true);
     }// end transer_acc_exis method
 
     // transfer money to another user
-    public static double transfer_money(boolean user_access, boolean receiving_acc, Account Main_user,
-            Account Second_user) {
-        Scanner input = new Scanner(System.in);
-        // Scanner input2 = new Scanner(System.in);
+    public static void transfer_money(Account sourceAccount){
+        user_account = true;
+        Scanner scanner = new Scanner(System.in);
+        String uxinput = "";
 
-        if (user_access && receiving_acc == true) {// check if both accounts are valid
-            System.out.println("Your balance: " + Main_user.getAccount_balance());
-            System.out.println("how much do you want to send?: "); // user will select how much money to send into the
-                                                                   // other account
-            Double money = input.nextDouble();
-            System.out.println("confirm money transfer with y/n: ");
-            // String decision = input2.nextLine();
+        System.out.println("Initiating account transfer.");
+        Account destinationAccount = transfer_acc_exists();//Once we have the transfer account
 
-            Main_user.subtract_balance(Main_user.getAccount_balance(), money);// subtract money from the account balance
-            System.out.println("Balance is: " + Main_user.getAccount_balance());// display new balance
+        do {
+            if (user_account == true &&  user_account == true) {// check if both accounts are valid
+                System.out.println("Your balance: " + sourceAccount.getAccount_balance());
+                System.out.println("how much do you want to send?: "); // user will select how much money to send
+                try {
+                    Double money = scanner.nextDouble();
+                    if((money > 0) && (money <= sourceAccount.getAccount_balance())){ //Not negative, and not more than balance
+                        sourceAccount.subtract_balance(sourceAccount.getAccount_balance(), money);// subtract money from the account balance
+                        System.out.println("Balance is: " + sourceAccount.getAccount_balance());// display new balance
+                        destinationAccount.add_balance(destinationAccount.getAccount_balance(), money); // add money into the account's balance
+                        // that is receiving
+                        System.out.println("Balance for second user is: " + destinationAccount.getAccount_balance());// display receivers
+                        break;
+                    }
+                    else {
+                        System.out.println("Invalid transfer amount. Make sure your transfer amount does not exceed your account balance.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Invalid amount has been entered, try again. (eg. 00.00)");
+                }
+            } // end if statement
+        }
+        while (true);
 
-            Second_user.add_balance(Second_user.getAccount_balance(), money); // add money into the account's balance
-                                                                              // that is receiving
-            System.out.println("Balance for second user is: " + Second_user.getAccount_balance());// display receivers
-                                                                                                  // balance(REMOVE
-                                                                                                  // BEFORE DUE DATE)
-
-            input.close();
-            return 1;
-        } // end if statement
-        input.close();
-        return 0;
     }// end transfer_money method
 
-    public static void main(String[] args) {
-        Manager.readData();
-//        Manager.printAccounts();
-
-        Account Main_user = account_accessed("98663859");
-
-        Account Second_user = transer_acc_exists("00932734");
-        
-        checkBalance(Main_user);
-
-        transfer_money(user_account, sender_account, Main_user, Second_user);
-
-    }// end main
 }// end money_transfer class

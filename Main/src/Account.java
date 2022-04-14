@@ -67,5 +67,12 @@ public class Account{
         this.type = type;
     }
 
-
+    public Boolean isAdmin(){
+        if(this.type.matches("admin")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

@@ -4,15 +4,27 @@ import java.util.Scanner;
 
         public static void userInput(Account acc){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter the amount to be deposited: ");
-            amt = scanner.nextInt();
-
-            if(amt<=0){
-                System.out.println("Invalid Deposit Amount");
-
-            }else{
-                acc.setAccount_balance(acc.getAccount_balance() + amt);
-                System.out.println(acc.getAccount_balance());
+            String uxinput = "";
+            do {
+                try {
+                    money_transfer.checkBalance(acc);
+                    System.out.println("Enter the amount to be deposited: ");
+                    uxinput = scanner.nextLine();
+                    amt = Double.parseDouble(uxinput);
+                    if(amt<=0){
+                        System.out.println("Invalid amount has been entered, try again. (eg. 00.00)");
+                    } else{
+                        System.out.println("Depositing " + amt + " into your account.....");
+                        acc.setAccount_balance(acc.getAccount_balance() + amt);
+                        System.out.println("Deposit has been Successful!\nYour new account balance is: " + acc.getAccount_balance());
+                        break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Invalid amount has been entered, try again. (eg. 00.00)");
+                }
             }
+            while (true);
         }
     }

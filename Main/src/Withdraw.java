@@ -1,35 +1,31 @@
 import java.util.Scanner;
 
 public class Withdraw {
-    static Boolean user_account = false;
+    public static double amount = 0.0;
 
-    public static Account account_accessed(String account_number) {
-        Boolean found = true;
-
-        if (found) {
-            Account accountfound = Manager.findAccount(account_number);
-            System.out.println("your account has been accessed: " + accountfound.getUsername());
-            user_account = true;
-            return accountfound;
-        }
-        System.out.println("your account was not found");
-
-        return null;
-    }
-    public static int amount = 0;
-    public static void withdrawal(boolean user_access, Account user){
-        double balance = user.getAccount_balance();
-        System.out.println("Your current balance is: " + balance);
-
+    public static void withdrawal(Account user){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the amount: ");
-        amount = scanner.nextInt();
-
-        if(balance > amount ){
-            user.subtract_balance(user.getAccount_balance(), amount);
+        String uxinput = "";
+        do {
+            try {
+                money_transfer.checkBalance(user);
+                System.out.println("Enter the amount to be withdrawn: ");
+                uxinput = scanner.nextLine();
+                amount = Double.parseDouble(uxinput);
+                if(user.getAccount_balance() < amount){
+                    System.out.println("Invalid amount has been entered. make sure the amount of your withdrawal, does not exceed your balance.");
+                } else{
+                    System.out.println("Withdrawing " + amount + " from your account.....");
+                    user.subtract_balance(user.getAccount_balance(), amount);
+                    System.out.println("Withdrawal has been Successful!\nYour new account balance is: " + user.getAccount_balance());
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println("Invalid amount has been entered, try again. (eg. 00.00)");
+            }
         }
-        else{
-            System.out.println("Invalid amount");
-        }
+        while (true);
     }
 }

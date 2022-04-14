@@ -1,4 +1,3 @@
-import javax.lang.model.type.NullType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class Manager{
         return myAccounts;
     }
 
-    public static void writeData(Account myAccount){ //writes new account onto file
+    public static void writeData(){ //writes new account onto file
 
         try(FileWriter fw = new FileWriter(file_name, false);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -61,13 +60,10 @@ public class Manager{
         for(int x =0; x < myAccounts.size(); x++){
             if (myAccounts.get(x).getAccount_number().matches(account_number)){
                 System.out.println("Account was successfully found:");
-                printSingleAccount(myAccounts.get(x));
+                customerFacingPrint(myAccounts.get(x));
                 return myAccounts.get(x);
             }
         }
-        System.out.println("Sorry, no account with that account number was found. \nCreating a new account:");
-//        printSingleAccount(newAccount);
-//        myAccounts.add(newAccount);
         return empty;
     }
 
@@ -75,11 +71,10 @@ public class Manager{
         for(int x =0; x < myAccounts.size(); x++){
             if (myAccounts.get(x).getUsername().matches(username)){
                 System.out.println("Account was successfully found:");
-                printSingleAccount(myAccounts.get(x));
+                customerFacingPrint(myAccounts.get(x));
                 return true;
             }
         }
-        System.out.println("Sorry, no account with that username was found.");
         return false;
     }
 
@@ -105,6 +100,12 @@ public class Manager{
             System.out.println("Account Type: " + singleAccount.getType());
     }
 
+    public static void customerFacingPrint(Account singleAccount){ //Test method to print current accounts list
+        System.out.print("Username: " + singleAccount.getUsername() + " ");
+        System.out.println("Account Number: " + singleAccount.getAccount_number()+ " ");
+
+    }
+
     public static void createNewAccount(String newUsername, String newPassword, String type){
         String newAccountNo = generateAccountNumber();
         Double balance = 0.00;
@@ -128,7 +129,7 @@ public class Manager{
         int number = rnd.nextInt(99999999);
         String account_number = String.format("%08d", number);
 
-        while(!findAccount(account_number).getUsername().matches("Null")){
+        while(!findAccount(account_number).getUsername().matches("Null")){ //while acount number already exists
             number = rnd.nextInt(99999999);
             account_number = String.format("%08d", number);
         }
@@ -143,7 +144,7 @@ public class Manager{
             System.out.println("Your account was successfully deleted.");
 
         }else{
-            System.out.println("Unable to delet this account, double check your credentials.");
+            System.out.println("Unable to delete this account, double check your credentials.");
         }
 
     }
