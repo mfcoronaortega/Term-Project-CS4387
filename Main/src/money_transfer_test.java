@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLOutput;
 import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class money_transfer_test {
     int balance;
@@ -14,18 +14,23 @@ public class money_transfer_test {
     money_transfer acc = new money_transfer();
 
     @Test
-    public void account_accessed_test(){
-        String account_number = "98663859";
-        Account foundAccount = acc.account_accessed(account_number);
-        assert foundAccount != null;
-        assertSame(foundAccount.getAccount_number(), acc.account_accessed(account_number).getAccount_number());
+    public void valid_transfer_test(){
+        double money = 10;
+        Account main_acc = new Account();
+        main_acc.setUsername("johndoe2");
+        main_acc.setPassword("johnPW12");
+        main_acc.setAccount_number("98663859");
+        main_acc.setAccount_balance(10.09);
+        main_acc.setType("checking");
+
+
+        //Account sec_acc = Manager.findAccount("00932734");
+
+        //change the transfer money to force input instead of using the scanner
+        assertTrue(acc.transfer_money(main_acc,money, "98663859"));
+
+
         //assertEquals(foundAccount, acc.account_accessed(account_number));
     }
-    @Test
-    public void account_not_accessed_test(){
-        String account_number = "98663859";
-        Account foundAccount = Manager.findAccount("12345678");
-        assertNotSame(foundAccount, acc.account_accessed(account_number));
-        //assertEquals(foundAccount, acc.account_accessed(account_number));
-    }
+
 }
