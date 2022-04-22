@@ -2,7 +2,7 @@ import java.util.Scanner;
     class Deposit{
         public static double amt = 0.0;
 
-        public static void userInput(Account acc){
+        public static Double userInput(Account acc){
             Scanner scanner = new Scanner(System.in);
             String uxinput = "";
             do {
@@ -15,7 +15,8 @@ import java.util.Scanner;
                         System.out.println("Invalid amount has been entered, try again. (eg. 00.00)");
                     } else{
                         System.out.println("Depositing " + amt + " into your account.....");
-                        acc.setAccount_balance(acc.getAccount_balance() + amt);
+                        //acc.setAccount_balance(acc.getAccount_balance() + amt);
+                        acc.add_balance(acc.getAccount_balance() , amt);
                         System.out.println("Deposit has been Successful!\nYour new account balance is: " + acc.getAccount_balance());
                         break;
                     }
@@ -26,5 +27,6 @@ import java.util.Scanner;
                 }
             }
             while (true);
+            return acc.getAccount_balance();
         }
     }
