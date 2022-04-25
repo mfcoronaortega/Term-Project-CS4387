@@ -13,6 +13,7 @@ import java.util.Scanner;
                     amt = Double.parseDouble(uxinput);
                     if(amt<=0){
                         System.out.println("Invalid amount has been entered, try again. (eg. 00.00)");
+                        return acc.getAccount_balance();
                     } else{
                         System.out.println("Depositing " + amt + " into your account.....");
                         //acc.setAccount_balance(acc.getAccount_balance() + amt);
