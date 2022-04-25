@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Withdraw {
     public static double amount = 0.0;
 
-    public static void withdrawal(Account user){
+    public static Double withdrawal(Account user){
         Scanner scanner = new Scanner(System.in);
         String uxinput = "";
         do {
@@ -27,5 +27,6 @@ public class Withdraw {
             }
         }
         while (true);
+        return user.getAccount_balance();
     }
 }

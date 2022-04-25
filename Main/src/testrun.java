@@ -1,4 +1,4 @@
-public class testRun {
+public class testrun {
 
     public static void main(String[] args) {
 
